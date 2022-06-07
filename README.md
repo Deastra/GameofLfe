@@ -1,4 +1,4 @@
 # GameofLfe
 
 ### First Version (Console)
-To run:: ``` make game ``` in terminal
+To run - ``` make game ``` in terminal
