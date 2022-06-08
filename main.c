@@ -4,5 +4,5 @@
 
 int main(){
 
-    Life();
+    Life(1);
 }
