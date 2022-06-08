@@ -53,6 +53,25 @@ int ifAllDead(int** map){
     return 1;
 }
 
+int countNeighborsCircular(int **map,int x,int y){
+    int n=0;
+    int x1=x;
+    int y1=y;
+    for(int i=-1;i<=1;i++){
+        for(int j=-1;j<=1;j++){
+            if(x+i==6){x1=0;}
+            else if(x+i==-1){x1=5;}
+            else{x1=x+i;}
+            if(y+j==6){y1=0;}
+            else if(y+j==-1){y1=5;}
+            else{y1=y+j;}
+            // printf("%d %d | %d %d\n",x,y,x1,y1);
+            if(map[x1][y1]==1){n++;}
+        }
+    }
+    return n-map[x][y];
+}
+
 int countNeighbors(int** map,int x, int y){
     int n=0;
 
@@ -81,8 +100,8 @@ int countNeighbors(int** map,int x, int y){
 
 int getNextState(int** map,int x,int y,int cf){
     int n;
-
-    n=countNeighbors(map,x,y);
+    if(cf){n=countNeighborsCircular(map,x,y);}
+    else{n=countNeighbors(map,x,y);}
     
     if(n==3){ return 1; }         // no matter, next is always alive
     if(n==2){ return map[x][y];}  // keeps current state
