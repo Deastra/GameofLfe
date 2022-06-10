@@ -1,0 +1,3 @@
+/Users/nigar/Desktop/Game of Life/GameofLfe/CMakeFiles/GameOfLife.dir
+/Users/nigar/Desktop/Game of Life/GameofLfe/CMakeFiles/edit_cache.dir
+/Users/nigar/Desktop/Game of Life/GameofLfe/CMakeFiles/rebuild_cache.dir
