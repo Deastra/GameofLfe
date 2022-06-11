@@ -1,8 +1,6 @@
-#include "game/life.h"
-
-
+#include "gui/life_gui.h"
 
 int main(){
-
-    Life(1);
+    Game(1);
+    return 0;
 }
