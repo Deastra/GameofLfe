@@ -122,7 +122,7 @@ int** nextDay(int** map,int cf){
     return newmap;
 }
 
-int** lifeDay(int cf,int **map){
+void Life(int version){
     int** map=firstDay(); // initializing the map and randomizing cells
     printMap(map);  // displaying the first day of life
     
@@ -131,12 +131,10 @@ int** lifeDay(int cf,int **map){
     while(count!=nDays){
         printf("----------------- %d\n",count); // current day
         sleep(1); // slowing down the process
-        map=nextDay(map,cf);  // updating the map of the life based on the last day
+        map=nextDay(map,version);  // updating the map of the life based on the last day
         printMap(map);  // displaying the new day
         count++;
     }
    
-    puts("---------------------------------");
-    return map;
- 
+    puts("---------------------------------"); 
 }
