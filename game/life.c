@@ -19,9 +19,9 @@ void printMap(int** map){
     for(int i=0;i<SIZE;i++){
         for(int j=0;j<SIZE;j++){
             if(map[i][j]==0){
-                printf("\033[0;31m%d ",map[i][j]);
+                printf("\033[0;31m%d ",map[i][j]); // Displaying red for deads
             }else{
-                printf("\033[0;32m%d ",map[i][j]);
+                printf("\033[0;32m%d ",map[i][j]); // Displaying green for alives
             }
 
         }
@@ -31,12 +31,12 @@ void printMap(int** map){
 }
 
 int** firstDay(){
-    int** newmap=initiateMap();
+    int** newmap=initiateMap(); // Initiating the life
     srand(time(NULL));
     int f=0;
     for(int i=0;i<SIZE;i++){
         for(int j=0;j<SIZE;j++){
-            f=rand()%2;
+            f=rand()%2; // random state for the cell
             newmap[i][j]=f;
         }
     }
@@ -59,6 +59,7 @@ int countNeighborsCircular(int **map,int x,int y){
     int y1=y;
     for(int i=-1;i<=1;i++){
         for(int j=-1;j<=1;j++){
+            // Conditions for the side or corner borders of the map
             if(x+i==SIZE){x1=0;}
             else if(x+i==-1){x1=SIZE-1;}
             else{x1=x+i;}
@@ -73,7 +74,8 @@ int countNeighborsCircular(int **map,int x,int y){
 
 int countNeighbors(int** map,int x, int y){
     int n=0;
-
+    // Conditions depending on the position of the cell
+    // If it is in the center or at the sides of the map
     if(x>0 && x<5 && y>0 && y<5){
         for(int i=-1;i<=1;i++){
             for(int j=-1;j<=1;j++){
@@ -92,15 +94,15 @@ int countNeighbors(int** map,int x, int y){
             }
         }
     }
-
-    return n-map[x][y]; // substitute the value of the current cell, as it also counted in iterations
+    // substitute the value of the current cell, as it also counted in iterations
+    return n-map[x][y]; 
      
 }
 
 int getNextState(int** map,int x,int y,int cf){
     int n;
-    if(cf){n=countNeighborsCircular(map,x,y);}
-    else{n=countNeighbors(map,x,y);}
+    if(cf){n=countNeighborsCircular(map,x,y);} //Neighboors count for circular version
+    else{n=countNeighbors(map,x,y);}           //Neighboors count for direct version
     
     if(n==3){ return 1; }         // no matter, next is always alive
     if(n==2){ return map[x][y];}  // keeps current state
@@ -109,33 +111,32 @@ int getNextState(int** map,int x,int y,int cf){
 }
 
 int** nextDay(int** map,int cf){
-    int **newmap=initiateMap();
+    // New map created for each next day
+    int **newmap=initiateMap(); 
     for(int i=0;i<SIZE;i++){
         for(int j=0;j<SIZE;j++){
-            newmap[i][j]=getNextState(map,i,j,cf);
+            newmap[i][j]=getNextState(map,i,j,cf); // Next day's state for the cell
         }
     }
     free(map);
     return newmap;
 }
 
-
-
 int** lifeDay(int cf,int **map){
-    // int** map=firstDay();
-    // printMap(map);
-    // int count=0;
-
-    // while(count!=10){
-        // printf("----------------- %d\n",count);
-        sleep(1);
-        map=nextDay(map,cf);
-        // printMap(map);
-        
-    //         count++;
-    // }
+    int** map=firstDay(); // initializing the map and randomizing cells
+    printMap(map);  // displaying the first day of life
+    
+    int count=0;
+    int nDays=100; // number of total days for life
+    while(count!=nDays){
+        printf("----------------- %d\n",count); // current day
+        sleep(1); // slowing down the process
+        map=nextDay(map,cf);  // updating the map of the life based on the last day
+        printMap(map);  // displaying the new day
+        count++;
+    }
    
-    // puts("---------------------------------");
+    puts("---------------------------------");
     return map;
  
 }
