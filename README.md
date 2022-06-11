@@ -1,4 +1,4 @@
-# GameofLfe
+# Game of Life ( Simulator )
 
 ### Run
 * In the main project folder terminal type ``` cmake -S . -B build ```
