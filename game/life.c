@@ -5,10 +5,10 @@ void reset(){
 }
 
 int** initiateMap(){
-    int **map=(int**)malloc(sizeof(int)*6*6);
-    for(int i=0;i<6;i++){
-        map[i]=(int*)malloc(sizeof(int)*6);
-        for(int j=0;j<6;j++){
+    int **map=(int**)malloc(sizeof(int)*SIZE*SIZE);
+    for(int i=0;i<SIZE;i++){
+        map[i]=(int*)malloc(sizeof(int)*SIZE);
+        for(int j=0;j<SIZE;j++){
             map[i][j]=0;
         }
     }
@@ -16,8 +16,8 @@ int** initiateMap(){
 }
 
 void printMap(int** map){
-    for(int i=0;i<6;i++){
-        for(int j=0;j<6;j++){
+    for(int i=0;i<SIZE;i++){
+        for(int j=0;j<SIZE;j++){
             if(map[i][j]==0){
                 printf("\033[0;31m%d ",map[i][j]);
             }else{
@@ -34,8 +34,8 @@ int** firstDay(){
     int** newmap=initiateMap();
     srand(time(NULL));
     int f=0;
-    for(int i=0;i<6;i++){
-        for(int j=0;j<6;j++){
+    for(int i=0;i<SIZE;i++){
+        for(int j=0;j<SIZE;j++){
             f=rand()%2;
             newmap[i][j]=f;
         }
@@ -44,12 +44,12 @@ int** firstDay(){
 }
 
 int ifAllDead(int** map){
-    for(int i=0;i<6;i++){
-        for(int j=0;j<6;j++){
+    for(int i=0;i<SIZE;i++){
+        for(int j=0;j<SIZE;j++){
             if(map[i][j]==1){return 0;}
         }
     }
-    puts("Everybody Dead :(");
+    // puts("Everybody Dead :(");
     return 1;
 }
 
@@ -59,13 +59,12 @@ int countNeighborsCircular(int **map,int x,int y){
     int y1=y;
     for(int i=-1;i<=1;i++){
         for(int j=-1;j<=1;j++){
-            if(x+i==6){x1=0;}
-            else if(x+i==-1){x1=5;}
+            if(x+i==SIZE){x1=0;}
+            else if(x+i==-1){x1=SIZE-1;}
             else{x1=x+i;}
-            if(y+j==6){y1=0;}
-            else if(y+j==-1){y1=5;}
+            if(y+j==SIZE){y1=0;}
+            else if(y+j==-1){y1=SIZE;}
             else{y1=y+j;}
-            // printf("%d %d | %d %d\n",x,y,x1,y1);
             if(map[x1][y1]==1){n++;}
         }
     }
@@ -85,8 +84,8 @@ int countNeighbors(int** map,int x, int y){
     else{
         int i1= (x==0 ? 0 : -1);
         int j1= (y==0 ? 0 : -1);
-        int i2= (x==5 ? 0 : 1);
-        int j2= (y==5 ? 0 : 1);
+        int i2= (x==SIZE-1 ? 0 : 1);
+        int j2= (y==SIZE-1 ? 0 : 1);
         for(int i=i1;i<=i2;i++){
             for(int j=j1;j<=j2;j++){
                 if(map[x+i][y+j]==1){n++;}
@@ -111,8 +110,8 @@ int getNextState(int** map,int x,int y,int cf){
 
 int** nextDay(int** map,int cf){
     int **newmap=initiateMap();
-    for(int i=0;i<6;i++){
-        for(int j=0;j<6;j++){
+    for(int i=0;i<SIZE;i++){
+        for(int j=0;j<SIZE;j++){
             newmap[i][j]=getNextState(map,i,j,cf);
         }
     }
@@ -120,20 +119,23 @@ int** nextDay(int** map,int cf){
     return newmap;
 }
 
-void Life(int cf){
-    int** map=firstDay();
-    printMap(map);
-    int count=0;
 
-    while(count!=10){
-        printf("----------------- %d\n",count);
+
+int** lifeDay(int cf,int **map){
+    // int** map=firstDay();
+    // printMap(map);
+    // int count=0;
+
+    // while(count!=10){
+        // printf("----------------- %d\n",count);
         sleep(1);
         map=nextDay(map,cf);
-        printMap(map);
-        if(ifAllDead(map)){break;}
-        count++;
-    }
-    puts("---------------------------------");
-
+        // printMap(map);
+        
+    //         count++;
+    // }
+   
+    // puts("---------------------------------");
+    return map;
  
 }

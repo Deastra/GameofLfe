@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <time.h>
-
+#define SIZE 15
 
 void reset();
 int** initiateMap();
@@ -15,7 +15,7 @@ int countNeighborsCircular(int **map,int x,int y);
 int countNeighbors(int** map,int x, int y);
 int getNextState(int** map,int x,int y,int cf);
 int** nextDay(int** map,int cf);
-void Life(int cf);
+int** lifeDay(int cf,int **maps);
 
 
 #endif
