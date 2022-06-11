@@ -9,10 +9,12 @@ find_package(
 # linking included libraries
 target_link_libraries(gui
   ${SDL2_LIBRARIES}
+  game
 )
 
 # importing include directory
 target_include_directories(gui
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} 
-  PUBLIC ${SDL2_INCLUDE_DIRS}
+  PUBLIC ${SDL2_INCLUDE_DIRS} 
 )
+

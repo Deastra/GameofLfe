@@ -1,5 +1,4 @@
 #include "life_gui.h"
-#include "../game/life.h"
 
 int height=600;
 int width=600;
@@ -17,7 +16,7 @@ SDL_Renderer* Create_Window_Renderer(int width, int height){
         SDL_WINDOW_SHOWN
     );
     
-
+    if(win==NULL){printf("%s",SDL_GetError());}
     SDL_Renderer * ren = SDL_CreateRenderer(
     win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     return ren;
