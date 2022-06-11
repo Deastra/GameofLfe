@@ -44,6 +44,8 @@ int getNextState(int** map,int x,int y,int cf);
 int** nextDay(int** map,int cf);
 
 // Console version of the program using ansicode drawing
-int** lifeDay(int cf,int **maps);
+// version=1:: circular-neighboors version
+// else:: direct-neighboors version
+void Life(int version);
 
 #endif
