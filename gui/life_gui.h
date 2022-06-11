@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
-#include <SDL.h>
+#include <SDL.h>  // include SDL library here with relative path 
 #include "life.h"
 
 #define SIZE 15
