@@ -1,20 +1,19 @@
-cmake_minimum_required(VERSION 3.23.1)
-
+cmake_minimum_required(VERSION 3.0.1)
 
 project(GameOfLife)
 
+set(CMAKE_C_STANDART 11)
 
-add_executable(${PROJECT_NAME} "")
-
-
-target_sources(${PROJECT_NAME} PRIVATE main.c game/life.c game/life.h gui/life_gui.c)
+add_executable(${PROJECT_NAME} main.c)
 
 add_subdirectory(gui)
+add_subdirectory(game)
 
-find_package(SDL2 REQUIRED)
-include_directories(
-    PUBLIC ${SDL2_INCLUDE_DIRS}
+target_include_directories(${PROJECT_NAME}
+    # PUBLIC ${SDL2_INCLUDE_DIRS}
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
+    PUBLIC gui
 )
 
-target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} gui)
+
